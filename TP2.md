@@ -209,51 +209,52 @@ Exemple 1)
 1) Généralisez le programme à un nombre quelconque de paramètres (pensez à SHIFT)
 1) Modifiez votre programme pour que les notes ne soient plus données en paramètres, mais saisies et stockées au fur et à mesure dans un tableau.
 
-    #!/bin/bash
+    '''
+        #!/bin/bash
 
-    function is_number() 
-    {
-        re='^[+-]?[0-9]+([.][0-9]+)?$'
-        
-        if ! [[ $1 =~ $re ]]; then
-        
-            return 1 
-        else 
-            return 0 
-        fi 
-    }
+        function is_number() 
+        {
+            re='^[+-]?[0-9]+([.][0-9]+)?$'
+            
+            if ! [[ $1 =~ $re ]]; then
+            
+                return 1 
+            else 
+                return 0 
+            fi 
+        }
 
-    min=$1
-    max=$1
-    somme=0
+        min=$1
+        max=$1
+        somme=0
 
-    while (("$#"))
-    do
-        is_number $1
-        if [ $? -eq 0 ]; then
-            if [ $1 -lt -100 ] || [ $1 -gt 100 ]; then
-                echo "Un des paramètres doit être entre -100 et 100"
-            else
-                if [ $1 -gt $max ]; then
-                    max=$1
-                elif [ $1 -lt $min ]; then
-                    min=$1
+        while (("$#"))
+        do
+            is_number $1
+            if [ $? -eq 0 ]; then
+                if [ $1 -lt -100 ] || [ $1 -gt 100 ]; then
+                    echo "Un des paramètres doit être entre -100 et 100"
+                else
+                    if [ $1 -gt $max ]; then
+                        max=$1
+                    elif [ $1 -lt $min ]; then
+                        min=$1
+                    fi
                 fi
+            else
+                echo "Erreur, un des paramètres n'est pas un nombre"
             fi
-        else
-            echo "Erreur, un des paramètres n'est pas un nombre"
-        fi
 
-    ((i++))
-    somme=$(( somme + $1 ))
+        ((i++))
+        somme=$(( somme + $1 ))
 
-    shift
-    done
+        shift
+        done
 
-    moyenne=$(echo "$(( $somme / $i ))" | bc -l)
+        moyenne=$(echo "$(( $somme / $i ))" | bc -l)
 
-    echo "Min : $min"
-    echo "Max : $max"
-    printf 'Moyenne : %.2f\n' $moyenne
-
+        echo "Min : $min"
+        echo "Max : $max"
+        printf 'Moyenne : %.2f\n' $moyenne
+    '''
 ![](images/image19.png)
