@@ -209,7 +209,7 @@ Exemple 1)
 1) Généralisez le programme à un nombre quelconque de paramètres (pensez à SHIFT)
 1) Modifiez votre programme pour que les notes ne soient plus données en paramètres, mais saisies et stockées au fur et à mesure dans un tableau.
 
-    '''
+
         #!/bin/bash
 
         function is_number() 
@@ -256,5 +256,5 @@ Exemple 1)
         echo "Min : $min"
         echo "Max : $max"
         printf 'Moyenne : %.2f\n' $moyenne
-    '''
+  
 ![](images/image19.png)
