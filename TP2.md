@@ -90,7 +90,7 @@ fi
 
 Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour vérifier que ce paramètre est un nombre réel
 
-'''bash
+
     #!/bin/bash
 
     function is_number() 
@@ -113,7 +113,7 @@ Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour v
     else
         echo "Erreur"
     fi
-'''
+
 
 ![](images/image14.png)
 
