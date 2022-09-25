@@ -157,10 +157,10 @@ Exemple 1)
     echo La factorielle est : $fact
     '''
 
-    ![](images/image16.png)
+![](images/image16.png)
 
 
-    Exemple 2)
+Exemple 2)
 
     '''bash
     #!/bin/bash
