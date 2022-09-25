@@ -91,28 +91,28 @@ fi
 Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour vérifier que ce paramètre est un nombre réel
 
 '''bash
-#!/bin/bash
+    #!/bin/bash
 
-function is_number() 
-{
-    re='^[+-]?[0-9]+([.][0-9]+)?$'
-    
-    if ! [[ $1 =~ $re ]]; then
-    
-        return 1 
-    else 
-        return 0 
-    fi 
-}
+    function is_number() 
+    {
+        re='^[+-]?[0-9]+([.][0-9]+)?$'
+        
+        if ! [[ $1 =~ $re ]]; then
+        
+            return 1 
+        else 
+            return 0 
+        fi 
+    }
 
-read -p "Ecrivez un nombre  " nombre 
-is_number $nombre 
+    read -p "Ecrivez un nombre  " nombre 
+    is_number $nombre 
 
-if [ $? -eq 0 ]; then 
-    echo "c'est un nombre"
-else
-    echo "Erreur"
-fi
+    if [ $? -eq 0 ]; then 
+        echo "c'est un nombre"
+    else
+        echo "Erreur"
+    fi
 '''
 
 ![](images/image14.png)
