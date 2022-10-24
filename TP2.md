@@ -1,6 +1,6 @@
-﻿**TP2**
+﻿# TP2
 
-**Exercice 1 : Variables d’environnement**
+## Exercice 1 : Variables d’environnement
 
 1. **Dans quels dossiers bash trouve-t-il les commandes tapées par l’utilisateur**
 
@@ -30,19 +30,19 @@ La variable SHELL contient l’interpréteur de commande utilisateur.
 
 ![](images/image6.png)
 
-4. **Créez une variable locale MY\_VAR (le contenu n’a pas d’importance). Vérifiez que la variable existe.**
+4. **Créez une variable locale MY_VAR (le contenu n’a pas d’importance). Vérifiez que la variable existe.**
 
 ![](images/image7.png)
 
-5. **Tapez ensuite la commande bash. Que fait-elle ? La variable MY\_VAR existe-t-elle ? Expliquez. A la fin de cette question, tapez la commande exit pour revenir dans votre session initiale.**
+5. **Tapez ensuite la commande bash. Que fait-elle ? La variable MY_VAR existe-t-elle ? Expliquez. A la fin de cette question, tapez la commande exit pour revenir dans votre session initiale.**
 
-La commande bash lance un nouvel interpréteur de commande, la variable MY\_VAR n’existe plus, car c’est une variable locale. Donc en tapant exit on donne accès à la variable MY\_VAR. 
+La commande bash lance un nouvel interpréteur de commande, la variable MY_VAR n’existe plus, car c’est une variable locale. Donc en tapant exit on donne accès à la variable MY_VAR. 
 
 ![](images/image8.png)
 
-6. **Transformez MY\_VAR en une variable d’environnement et recommencez la question précédente. Expliquez.**
+6. **Transformez MY_VAR en une variable d’environnement et recommencez la question précédente. Expliquez.**
 
-Si on transforme MY\_VAR en une variable d’environnement, en tapant la commande bash la variable MY\_VAR existe, car elle est devenu une variable d’environnement 
+Si on transforme MY_VAR en une variable d’environnement, en tapant la commande bash la variable MY_VAR existe, car elle est devenu une variable d’environnement 
 
 ![](images/image9.png)
 
@@ -90,30 +90,30 @@ Vous enregistrerez vos scripts dans un dossier script que vous créerez dans vot
 
 Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour vérifier que ce paramètre est un nombre réel
 
+```consol
+#!/bin/bash
 
-    #!/bin/bash
+function is_number() 
+{
+    re='^[+-]?[0-9]+([.][0-9]+)?$'
+    
+    if ! [[ $1 =~ $re ]]; then
+    
+        return 1 
+    else 
+        return 0 
+    fi 
+}
 
-    function is_number() 
-    {
-        re='^[+-]?[0-9]+([.][0-9]+)?$'
-        
-        if ! [[ $1 =~ $re ]]; then
-        
-            return 1 
-        else 
-            return 0 
-        fi 
-    }
+read -p "Ecrivez un nombre  " nombre 
+is_number $nombre 
 
-    read -p "Ecrivez un nombre  " nombre 
-    is_number $nombre 
-
-    if [ $? -eq 0 ]; then 
-        echo "c'est un nombre"
-    else
-        echo "Erreur"
-    fi
-
+if [ $? -eq 0 ]; then 
+    echo "c'est un nombre"
+else
+    echo "Erreur"
+fi
+```
 
 ![](images/image14.png)
 
@@ -122,20 +122,22 @@ Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour v
 
 Écrivez un script qui vérifie l’existence d’un utilisateur dont le nom est donné en paramètre du script. Si le script est appelé sans nom d’utilisateur, il affiche le message : ”Utilisation : ***nom\_du\_script nom\_utilisateur***”, où ***nom\_du\_script*** est le nom de votre script récupéré automatiquement (si vous changez le nom de votre script, le message doit changer automatiquement)
 
-    #!/bin/bash
+```consol
+#!/bin/bash
 
-    if [ -z $1 ]; then
-        echo "Utilisation : $0 nom_utilisateur"
-    else
-        for utilisateur in $(cut -d: -f1 /etc/passud) 
-        do 
-            if [ $utilisateur = $1 ]; then 
-                echo "Cet utilisateur existe" 
-                exit
-            fi
-        done 
-        echo "Cet utilisateur n'existe pas"
-    fi
+if [ -z $1 ]; then
+    echo "Utilisation : $0 nom_utilisateur"
+else
+    for utilisateur in $(cut -d: -f1 /etc/passud) 
+    do 
+        if [ $utilisateur = $1 ]; then 
+            echo "Cet utilisateur existe" 
+            exit
+        fi
+    done 
+    echo "Cet utilisateur n'existe pas"
+fi
+```
 
 ![](images/image15.png)
 
@@ -145,36 +147,38 @@ Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour v
 
 Exemple 1)
 
-    #!/bin/bash
+```consol
+#!/bin/bash
 
-    nbr=$1
-    while [ $nbr -gt 1 ]
-    do
-        fact=$(($fact*nbr))
-        nbr=$((nbr-1))
-    done
+nbr=$1
+while [ $nbr -gt 1 ]
+do
+    fact=$(($fact*nbr))
+    nbr=$((nbr-1))
+done
 
-    echo La factorielle est : $fact
-    '''
+echo La factorielle est : $fact
+```
 
 ![](images/image16.png)
 
 
 Exemple 2)
 
-    '''bash
-    #!/bin/bash
+```consol
+#!/bin/bash
 
-    fact=1
+fact=1
 
-    nbr=$1
-    i=1
-    for((i;i<=nbr;i++))
-    do
-        fact=*(($fact*$i))
-    done
+nbr=$1
+i=1
+for((i;i<=nbr;i++))
+do
+    fact=*(($fact*$i))
+done
 
-    echo La factorielle de $nbr est : $fact
+echo La factorielle de $nbr est : $fact
+```
 
 ![](images/image17.png)
 
@@ -182,24 +186,26 @@ Exemple 2)
 
 Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demande à l’utilisateur de le deviner. Le programme écrira ”C’est plus !”, ”C’est moins !” ou ”Gagné !” selon les cas (vous utiliserez $RANDOM).
 
-    #!/bin/bash
+```consol
+#!/bin/bash
 
-    nombre=0
-    nbrAlea=$((1 + $RANDOM % 1000))
+nombre=0
+nbrAlea=$((1 + $RANDOM % 1000))
 
-    while [ $nombre -ne $nbrAlea ]
-    do
-        echo -n "Entrez un nombre entre 1 et 1000"
-        read nombre
+while [ $nombre -ne $nbrAlea ]
+do
+    echo -n "Entrez un nombre entre 1 et 1000"
+    read nombre
 
-        if [ "$nombre" -lt $nbrAlea ]; then
-            echo "C'est plus"
-        elif [ "$nombre -gt $nbrAlea" ]; then
-            echo "C'est moins"
-        fi
-    done
+    if [ "$nombre" -lt $nbrAlea ]; then
+        echo "C'est plus"
+    elif [ "$nombre -gt $nbrAlea" ]; then
+        echo "C'est moins"
+    fi
+done
 
-    echo "Gagné"
+echo "Gagné"
+```
 
 ![](images/image18.png)
 
@@ -209,52 +215,53 @@ Exemple 2)
 1) Généralisez le programme à un nombre quelconque de paramètres (pensez à SHIFT)
 1) Modifiez votre programme pour que les notes ne soient plus données en paramètres, mais saisies et stockées au fur et à mesure dans un tableau.
 
+```consol
+#!/bin/bash
 
-        #!/bin/bash
+function is_number() 
+{
+    re='^[+-]?[0-9]+([.][0-9]+)?$'
+    
+    if ! [[ $1 =~ $re ]]; then
+    
+        return 1 
+    else 
+        return 0 
+    fi 
+}
 
-        function is_number() 
-        {
-            re='^[+-]?[0-9]+([.][0-9]+)?$'
-            
-            if ! [[ $1 =~ $re ]]; then
-            
-                return 1 
-            else 
-                return 0 
-            fi 
-        }
+min=$1
+max=$1
+somme=0
 
-        min=$1
-        max=$1
-        somme=0
-
-        while (("$#"))
-        do
-            is_number $1
-            if [ $? -eq 0 ]; then
-                if [ $1 -lt -100 ] || [ $1 -gt 100 ]; then
-                    echo "Un des paramètres doit être entre -100 et 100"
-                else
-                    if [ $1 -gt $max ]; then
-                        max=$1
-                    elif [ $1 -lt $min ]; then
-                        min=$1
-                    fi
-                fi
-            else
-                echo "Erreur, un des paramètres n'est pas un nombre"
+while (("$#"))
+do
+    is_number $1
+    if [ $? -eq 0 ]; then
+        if [ $1 -lt -100 ] || [ $1 -gt 100 ]; then
+            echo "Un des paramètres doit être entre -100 et 100"
+        else
+            if [ $1 -gt $max ]; then
+                max=$1
+            elif [ $1 -lt $min ]; then
+                min=$1
             fi
+        fi
+    else
+        echo "Erreur, un des paramètres n'est pas un nombre"
+    fi
 
-        ((i++))
-        somme=$(( somme + $1 ))
+((i++))
+somme=$(( somme + $1 ))
 
-        shift
-        done
+shift
+done
 
-        moyenne=$(echo "$(( $somme / $i ))" | bc -l)
+moyenne=$(echo "$(( $somme / $i ))" | bc -l)
 
-        echo "Min : $min"
-        echo "Max : $max"
-        printf 'Moyenne : %.2f\n' $moyenne
-  
+echo "Min : $min"
+echo "Max : $max"
+printf 'Moyenne : %.2f\n' $moyenne
+```
+
 ![](images/image19.png)
